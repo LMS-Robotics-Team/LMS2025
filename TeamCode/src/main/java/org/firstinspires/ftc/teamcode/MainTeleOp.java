@@ -22,9 +22,9 @@ public class MainTeleOp extends LinearOpMode {
         // Repeatedly runs game code while op mode is still running.
         while (opModeIsActive()) {
             Drive.handleInput(gamepad1);
-            IntakeMotorControl.handleInput(gamepad1);
+            IntakeMotorControl.handleInput(gamepad2);
           //  ShooterTeleOp.handleInput(gamepad1);
-            BasicShooter.handleInput(gamepad1);
+            BasicShooter.handleInput(gamepad2);
         }
     }
 }
