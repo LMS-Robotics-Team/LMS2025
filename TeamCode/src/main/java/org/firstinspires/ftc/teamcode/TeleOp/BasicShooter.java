@@ -54,13 +54,18 @@ public class BasicShooter extends LinearOpMode {
     }
 
     public static void handleInput(Gamepad gamepad2) {
-        if (gamepad2.right_bumper) {
+        if (gamepad2.left_bumper) {
             shooterMotor1.setPower(0.75); // Full power
             shooterMotor2.setPower(0.75);
-        } else {
+        } else if (gamepad2.right_bumper){
+                shooterMotor1.setPower(1.0); // Full power
+                shooterMotor2.setPower(1.0);
+            }
+        else{
             shooterMotor1.setPower(0.0);
             shooterMotor2.setPower(0.0);
         }
+
 
         // Aimer servo control
         //if (gamepad1.left_bumper) {

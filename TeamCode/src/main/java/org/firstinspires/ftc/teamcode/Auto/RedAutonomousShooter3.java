@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous(name="Basic Autonomous Shooter", group="Concept")
-public class BasicAutonomousShooter extends LinearOpMode {
+@Autonomous(name="Basic Autonomous Red3", group="Concept")
+public class RedAutonomousShooter3 extends LinearOpMode {
 
     // Declare OpMode members.
     private DcMotor frontLeftMotor = null;
@@ -22,8 +22,8 @@ public class BasicAutonomousShooter extends LinearOpMode {
     // Constants for robot movement
     static final double DRIVE_SPEED = 0.5;
     static final double TURN_SPEED = 0.4;
-    static final double SHOOTER_POWER = 0.8;
-    static final double SERVO_OPEN_POSITION = 0.35; // Adjust as needed
+    static final double SHOOTER_POWER = 1.0;
+    static final double SERVO_OPEN_POSITION = 0.30; // Adjust as needed
     static final double SERVO_CLOSED_POSITION = 0.5; // Adjust as needed
 
     @Override
@@ -58,26 +58,29 @@ public class BasicAutonomousShooter extends LinearOpMode {
         backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         shooterMotor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         shooterMotor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        shooterServo1.setPosition(SERVO_CLOSED_POSITION);
+        shooterServo2.setPosition(SERVO_CLOSED_POSITION);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
         // Step 1: Drive straight forward for a few millimeters (adjust time as needed)
-        driveStraight(DRIVE_SPEED, 1.0); // Drive for 1 second
+        driveStraight(DRIVE_SPEED, 2.0); // Drive for 1 second
         stopRobot();
 
-        // Step 2: Turn right (adjust time as needed)
-        turnRight(TURN_SPEED, 0.8); // Turn for 0.8 seconds
+        // Step 2: Turn left (adjust time as needed)
+        turnLeft(TURN_SPEED, 1.8); // Turn for 0.8 seconds
         stopRobot();
 
         // Step 3: Drive straight forward for a few millimeters (adjust time as needed)
-        driveStraight(DRIVE_SPEED, 1.5); // Drive for 1.5 seconds
+        driveStraight(DRIVE_SPEED, .3); // Drive for 1.5 seconds
         stopRobot();
 
         // Step 4: Activate shooter mechanism
         activateShooter();
         sleep(6000); // Allow shooter to operate for 6 seconds
-        deactivateShooter();
+        //deactivateShooter();
+        stopRobot();
 
         telemetry.addData("Status", "Complete");
         telemetry.update();
@@ -98,6 +101,13 @@ public class BasicAutonomousShooter extends LinearOpMode {
         backLeftMotor.setPower(speed);
         frontRightMotor.setPower(-speed);
         backRightMotor.setPower(-speed);
+        sleep((long) (time * 1000));
+    }
+    public void turnLeft(double speed, double time) {
+        frontLeftMotor.setPower(-speed);
+        backLeftMotor.setPower(-speed);
+        frontRightMotor.setPower(speed);
+        backRightMotor.setPower(speed);
         sleep((long) (time * 1000));
     }
 
