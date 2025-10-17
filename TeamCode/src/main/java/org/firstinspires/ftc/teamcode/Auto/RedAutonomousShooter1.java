@@ -79,8 +79,8 @@ public class RedAutonomousShooter1 extends LinearOpMode {
         // Step 4: Activate shooter mechanism
         activateShooter();
         sleep(9000); // Allow shooter to operate for 6 seconds
-        //deactivateShooter();
-        stopRobot();
+        deactivateShooter();
+        //stopRobot();
 
         telemetry.addData("Status", "Complete");
         telemetry.update();
