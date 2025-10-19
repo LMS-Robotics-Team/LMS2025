@@ -15,6 +15,7 @@ public class IntakeMotorControl extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
 
     }
+
     // Declare motor variable
     private static DcMotor intakeMotor = null;
 
@@ -23,28 +24,29 @@ public class IntakeMotorControl extends LinearOpMode {
         intakeMotor = hardwareMap.get(DcMotor.class, "intake_motor");
 
 
-        intakeMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
 
         intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
-        }
+    }
 
-        public static void handleInput(Gamepad gamepad2) {
+    public static void handleInput(Gamepad gamepad2) {
 
 
         if (gamepad2.x) {
 
-            intakeMotor.setPower(1.0);
-        }
-        //else if (gamepad1.y) {
+            intakeMotor.setPower(0.2);
+        } else if (gamepad2.y) {
 
-        //    intakeMotor.setPower(-1.0);
-         else {
+            intakeMotor.setPower(0.5);
+        } else {
 
             intakeMotor.setPower(0.0);
         }
+
+
+    }
 }
 
-}
