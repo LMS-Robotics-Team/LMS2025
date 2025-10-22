@@ -82,10 +82,10 @@ public class BasicShooter extends LinearOpMode {
             //telemetry.addData("Servos", "Set to Position 1");
             //telemetry.update();
             //sleep(200); // Small delay to prevent rapid input
-        } else if (gamepad2.a) {
+        //} else if (gamepad2.a) {
             // Set servos to Position 2
-            aimerServo.setPosition(POSITION_TWO);
-            loaderServo.setPosition(POSITION_TWO);
+            //aimerServo.setPosition(POSITION_TWO);
+            //loaderServo.setPosition(POSITION_TWO);
             //telemetry.addData("Servos", "Set to Position 2");
             //telemetry.update();
             //sleep(200);
@@ -102,12 +102,5 @@ public class BasicShooter extends LinearOpMode {
             aimerServo.setPosition(0.5);
             loaderServo.setPosition(0.5);
         }
-
-        // Loader servo control
-       // if (gamepad1.left_bumper) {
-
-        //} else {
-
-        //}
     }
 }

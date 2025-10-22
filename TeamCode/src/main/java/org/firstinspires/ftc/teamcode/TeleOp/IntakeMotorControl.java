@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple; // For setting direction
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name="IntakeMotorControl", group="Linear OpMode")
 
@@ -18,16 +19,18 @@ public class IntakeMotorControl extends LinearOpMode {
 
     // Declare motor variable
     private static DcMotor intakeMotor = null;
+    private static Servo intakeServo = null;
 
     public static void init(HardwareMap hardwareMap) {
 
         intakeMotor = hardwareMap.get(DcMotor.class, "intake_motor");
-
+        intakeServo = hardwareMap.get(Servo.class, "intake_servo");
 
         intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
 
         intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        intakeServo.setDirection(Servo.Direction.FORWARD);
 
 
     }
@@ -45,8 +48,16 @@ public class IntakeMotorControl extends LinearOpMode {
 
             intakeMotor.setPower(0.0);
         }
+        //double triggerValue = gamepad2.right_trigger;
+        //double servoPosition = triggerValue;
+        //intakeServo.setPosition(servoPosition);
+        if (gamepad2.a) {
 
+            intakeServo.setPosition(0.70);
+        } else {
 
+            intakeServo.setPosition(0.5);
+        }
     }
 }
 
