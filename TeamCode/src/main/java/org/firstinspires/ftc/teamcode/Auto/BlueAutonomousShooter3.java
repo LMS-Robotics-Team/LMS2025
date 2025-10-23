@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous(name="Basic Autonomous Red2", group="Concept")
-public class RedAutonomousShooter2 extends LinearOpMode {
+@Autonomous(name="Basic Autonomous Blue3", group="Concept")
+public class BlueAutonomousShooter3 extends LinearOpMode {
 
     // Declare OpMode members.
     private DcMotor frontLeftMotor = null;
@@ -20,7 +20,6 @@ public class RedAutonomousShooter2 extends LinearOpMode {
     private Servo shooterServo2 = null;
     private Servo intakeServo = null;
 
-
     // Constants for robot movement
     static final double DRIVE_SPEED = 0.5;
     static final double TURN_SPEED = 0.4;
@@ -30,6 +29,7 @@ public class RedAutonomousShooter2 extends LinearOpMode {
     static final double HOME_POSITION = 0.5; // Adjust as needed
     static  final double FORWARD_POSITION = 0.7; // Adjust as needed
     static final long DELAY_MS = 1000;
+
 
     @Override
     public void runOpMode() {
@@ -73,16 +73,16 @@ public class RedAutonomousShooter2 extends LinearOpMode {
         waitForStart();
 
         // Step 1: Drive straight forward for a few millimeters (adjust time as needed)
-        driveStraight(DRIVE_SPEED, 3); // Drive for 1 second
+        driveStraight(DRIVE_SPEED, 0.8); // Drive for 1 second
         stopRobot();
 
-        // Step 2: Turn right (adjust time as needed)
-        turnRight(TURN_SPEED, 0.8); // Turn for 0.8 seconds
+        // Step 2: Turn left (adjust time as needed)
+        turnLeft(TURN_SPEED, 1.8); // Turn for 0.8 seconds
         stopRobot();
 
         // Step 3: Drive straight forward for a few millimeters (adjust time as needed)
-        //driveStraight(DRIVE_SPEED, 1.5); // Drive for 1.5 seconds
-        //stopRobot();
+        driveBack(DRIVE_SPEED, .4); // Drive for 1.5 seconds
+        stopRobot();
 
         // Step 4: Activate shooter mechanism
         activateShooter();
@@ -102,13 +102,26 @@ public class RedAutonomousShooter2 extends LinearOpMode {
         backRightMotor.setPower(speed);
         sleep((long) (time * 1000));
     }
-
+    public void driveBack(double speed, double time) {
+        frontLeftMotor.setPower(-speed);
+        frontRightMotor.setPower(-speed);
+        backLeftMotor.setPower(-speed);
+        backRightMotor.setPower(-speed);
+        sleep((long) (time * 1000));
+    }
     // Helper method to turn right
     public void turnRight(double speed, double time) {
         frontLeftMotor.setPower(speed);
         backLeftMotor.setPower(speed);
         frontRightMotor.setPower(-speed);
         backRightMotor.setPower(-speed);
+        sleep((long) (time * 1000));
+    }
+    public void turnLeft(double speed, double time) {
+        frontLeftMotor.setPower(-speed);
+        backLeftMotor.setPower(-speed);
+        frontRightMotor.setPower(speed);
+        backRightMotor.setPower(speed);
         sleep((long) (time * 1000));
     }
 

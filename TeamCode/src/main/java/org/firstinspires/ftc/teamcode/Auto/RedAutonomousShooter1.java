@@ -89,8 +89,9 @@ public class RedAutonomousShooter1 extends LinearOpMode {
         // Step 4: Activate shooter mechanism
         activateShooter();
         sleep(6000); // Allow shooter to operate for 6 seconds
-        deactivateShooter();
+        //deactivateShooter();
         stopRobot();
+
         turnLeft(TURN_SPEED, 1.0); // Turn for 0.8 seconds
         stopRobot();
         driveStraight(DRIVE_SPEED, 1.0); // Drive for 1 second

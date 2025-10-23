@@ -18,6 +18,7 @@ public class RedAutonomousShooter3 extends LinearOpMode {
     private DcMotor shooterMotor2 = null;
     private Servo shooterServo1 = null;
     private Servo shooterServo2 = null;
+    private Servo intakeServo = null;
 
     // Constants for robot movement
     static final double DRIVE_SPEED = 0.5;
@@ -25,6 +26,10 @@ public class RedAutonomousShooter3 extends LinearOpMode {
     static final double SHOOTER_POWER = 1.0;
     static final double SERVO_OPEN_POSITION = 0.30; // Adjust as needed
     static final double SERVO_CLOSED_POSITION = 0.5; // Adjust as needed
+    static final double HOME_POSITION = 0.5; // Adjust as needed
+    static  final double FORWARD_POSITION = 0.7; // Adjust as needed
+    static final long DELAY_MS = 1000;
+
 
     @Override
     public void runOpMode() {
@@ -40,6 +45,7 @@ public class RedAutonomousShooter3 extends LinearOpMode {
         shooterMotor2 = hardwareMap.get(DcMotor.class, "shooter_motor_2");
         shooterServo1 = hardwareMap.get(Servo.class, "aimer_servo");
         shooterServo2 = hardwareMap.get(Servo.class, "loader_servo");
+        intakeServo = hardwareMap.get(Servo.class, "intake_servo");
 
         // Most robots need the motor on one side to be reversed to drive forward.
         frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
@@ -50,6 +56,7 @@ public class RedAutonomousShooter3 extends LinearOpMode {
         shooterMotor2.setDirection(DcMotor.Direction.FORWARD);
         shooterServo1.setDirection(Servo.Direction.FORWARD);
         shooterServo2.setDirection(Servo.Direction.REVERSE);
+        intakeServo.setDirection(Servo.Direction.FORWARD);
 
         // Set motor modes
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -60,6 +67,7 @@ public class RedAutonomousShooter3 extends LinearOpMode {
         shooterMotor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         shooterServo1.setPosition(SERVO_CLOSED_POSITION);
         shooterServo2.setPosition(SERVO_CLOSED_POSITION);
+        intakeServo.setPosition(HOME_POSITION);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -78,7 +86,7 @@ public class RedAutonomousShooter3 extends LinearOpMode {
 
         // Step 4: Activate shooter mechanism
         activateShooter();
-        sleep(9000); // Allow shooter to operate for 6 seconds
+        sleep(6000); // Allow shooter to operate for 6 seconds
         //deactivateShooter();
         stopRobot();
 
@@ -125,6 +133,21 @@ public class RedAutonomousShooter3 extends LinearOpMode {
         shooterMotor2.setPower(SHOOTER_POWER);
         shooterServo1.setPosition(SERVO_OPEN_POSITION);
         shooterServo2.setPosition(SERVO_OPEN_POSITION);
+        for (int i = 0; i < 5; i++) { // Loop three times
+            // Move servo forward
+            intakeServo.setPosition(FORWARD_POSITION);
+            //telemetry.addData("Servo State", "Forward");
+            //telemetry.update();
+            sleep(DELAY_MS); // Wait for the specified delay
+
+            // Move servo back to home
+            intakeServo.setPosition(HOME_POSITION);
+            //telemetry.addData("Servo State", "Home");
+            //telemetry.update();
+            sleep(DELAY_MS); // Wait for the specified delay
+        }
+        shooterServo1.setPosition(0.5);
+        shooterServo2.setPosition(0.5);
     }
 
     // Helper method to deactivate shooter

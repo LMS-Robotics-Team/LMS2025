@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous(name="Basic Autonomous Red2", group="Concept")
-public class RedAutonomousShooter2 extends LinearOpMode {
+@Autonomous(name="Basic Autonomous Blue2", group="Concept")
+public class BlueAutonomousShooter2 extends LinearOpMode {
 
     // Declare OpMode members.
     private DcMotor frontLeftMotor = null;
@@ -73,13 +73,18 @@ public class RedAutonomousShooter2 extends LinearOpMode {
         waitForStart();
 
         // Step 1: Drive straight forward for a few millimeters (adjust time as needed)
-        driveStraight(DRIVE_SPEED, 3); // Drive for 1 second
+        driveStraight(DRIVE_SPEED, 1.8); // Drive for 1 second
         stopRobot();
 
         // Step 2: Turn right (adjust time as needed)
-        turnRight(TURN_SPEED, 0.8); // Turn for 0.8 seconds
+        turnLeft(TURN_SPEED, 0.3); // Turn for 0.8 seconds
         stopRobot();
 
+        driveStraight(DRIVE_SPEED, 1); // Drive for 1 second
+        stopRobot();
+
+        turnRight(TURN_SPEED, 0.8); // Turn for 0.8 seconds
+        stopRobot();
         // Step 3: Drive straight forward for a few millimeters (adjust time as needed)
         //driveStraight(DRIVE_SPEED, 1.5); // Drive for 1.5 seconds
         //stopRobot();
@@ -111,7 +116,13 @@ public class RedAutonomousShooter2 extends LinearOpMode {
         backRightMotor.setPower(-speed);
         sleep((long) (time * 1000));
     }
-
+    public void turnLeft(double speed, double time) {
+        frontLeftMotor.setPower(-speed);
+        backLeftMotor.setPower(-speed);
+        frontRightMotor.setPower(speed);
+        backRightMotor.setPower(speed);
+        sleep((long) (time * 1000));
+    }
     // Helper method to stop the robot
     public void stopRobot() {
         frontLeftMotor.setPower(0);
