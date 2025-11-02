@@ -58,9 +58,9 @@ public class BasicShooter extends LinearOpMode {
             shooterMotor1.setPower(0.75); // Full power
             shooterMotor2.setPower(0.75);
         } else if (gamepad2.right_bumper){
-                shooterMotor1.setPower(1.0); // Full power
-                shooterMotor2.setPower(1.0);
-            }
+            shooterMotor1.setPower(1.0); // Full power
+            shooterMotor2.setPower(1.0);
+        }
         else{
             shooterMotor1.setPower(0.0);
             shooterMotor2.setPower(0.0);
@@ -70,8 +70,8 @@ public class BasicShooter extends LinearOpMode {
         // Aimer servo control
         //if (gamepad1.left_bumper) {
         //    aimerServo.setPosition(AIM_UP_POSITION);
-         //   loaderServo.setPosition(LOADER_LOAD_POSITION);
-       //  else {if (gamepad1.dpad_down) {
+        //   loaderServo.setPosition(LOADER_LOAD_POSITION);
+        //  else {if (gamepad1.dpad_down) {
         //    aimerServo.setPosition(AIM_DOWN_POSITION);
         //    loaderServo.setPosition(LOADER_RELEASE_POSITION);
         //
@@ -82,7 +82,7 @@ public class BasicShooter extends LinearOpMode {
             //telemetry.addData("Servos", "Set to Position 1");
             //telemetry.update();
             //sleep(200); // Small delay to prevent rapid input
-        //} else if (gamepad2.a) {
+            //} else if (gamepad2.a) {
             // Set servos to Position 2
             //aimerServo.setPosition(POSITION_TWO);
             //loaderServo.setPosition(POSITION_TWO);
@@ -91,12 +91,12 @@ public class BasicShooter extends LinearOpMode {
             //sleep(200);
         }
         //else if (gamepad2.y) {
-            // Set servos to Position 3
-          //  aimerServo.setPosition(POSITION_THREE);
-            //loaderServo.setPosition(POSITION_THREE);
-            //telemetry.addData("Servos", "Set to Position 3");
-            //telemetry.update();
-            //sleep(200);
+        // Set servos to Position 3
+        //  aimerServo.setPosition(POSITION_THREE);
+        //loaderServo.setPosition(POSITION_THREE);
+        //telemetry.addData("Servos", "Set to Position 3");
+        //telemetry.update();
+        //sleep(200);
 
         else {
             aimerServo.setPosition(0.5);

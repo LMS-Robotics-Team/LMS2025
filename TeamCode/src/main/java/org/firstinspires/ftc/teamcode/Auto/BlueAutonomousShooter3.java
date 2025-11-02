@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode.Auto;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @Autonomous(name="Basic Autonomous Blue3", group="Concept")
@@ -18,7 +19,8 @@ public class BlueAutonomousShooter3 extends LinearOpMode {
     private DcMotor shooterMotor2 = null;
     private Servo shooterServo1 = null;
     private Servo shooterServo2 = null;
-    private Servo intakeServo = null;
+   // private Servo intakeServo = null;
+   private static DcMotor intakeRotor = null;
 
     // Constants for robot movement
     static final double DRIVE_SPEED = 0.5;
@@ -45,7 +47,8 @@ public class BlueAutonomousShooter3 extends LinearOpMode {
         shooterMotor2 = hardwareMap.get(DcMotor.class, "shooter_motor_2");
         shooterServo1 = hardwareMap.get(Servo.class, "aimer_servo");
         shooterServo2 = hardwareMap.get(Servo.class, "loader_servo");
-        intakeServo = hardwareMap.get(Servo.class, "intake_servo");
+        //intakeServo = hardwareMap.get(Servo.class, "intake_servo");
+        intakeRotor = hardwareMap.get(DcMotor.class, "intake_rotor");
 
         // Most robots need the motor on one side to be reversed to drive forward.
         frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
@@ -56,7 +59,8 @@ public class BlueAutonomousShooter3 extends LinearOpMode {
         shooterMotor2.setDirection(DcMotor.Direction.FORWARD);
         shooterServo1.setDirection(Servo.Direction.FORWARD);
         shooterServo2.setDirection(Servo.Direction.REVERSE);
-        intakeServo.setDirection(Servo.Direction.FORWARD);
+        //intakeServo.setDirection(Servo.Direction.FORWARD);
+        intakeRotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
         // Set motor modes
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -67,7 +71,8 @@ public class BlueAutonomousShooter3 extends LinearOpMode {
         shooterMotor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         shooterServo1.setPosition(SERVO_CLOSED_POSITION);
         shooterServo2.setPosition(SERVO_CLOSED_POSITION);
-        intakeServo.setPosition(HOME_POSITION);
+        //intakeServo.setPosition(HOME_POSITION);
+        intakeRotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -77,17 +82,26 @@ public class BlueAutonomousShooter3 extends LinearOpMode {
         stopRobot();
 
         // Step 2: Turn left (adjust time as needed)
-        turnLeft(TURN_SPEED, 1.8); // Turn for 0.8 seconds
+        turnRight(TURN_SPEED, 1.3); // Turn for 0.8 seconds
         stopRobot();
 
         // Step 3: Drive straight forward for a few millimeters (adjust time as needed)
-        driveBack(DRIVE_SPEED, .4); // Drive for 1.5 seconds
+        driveBack(DRIVE_SPEED, .2); // Drive for 1.5 seconds
         stopRobot();
 
         // Step 4: Activate shooter mechanism
         activateShooter();
         sleep(6000); // Allow shooter to operate for 6 seconds
         //deactivateShooter();
+        shooterServo1.setPosition(0.5);
+        shooterServo2.setPosition(0.5);
+        shooterMotor1.setPower(0);
+        shooterMotor2.setPower(0);
+        stopRobot();
+
+        turnLeft(TURN_SPEED, 0.5); // Turn for 0.8 seconds
+        stopRobot();
+        driveStraight(DRIVE_SPEED, 0.5); // Drive for 1 second
         stopRobot();
 
         telemetry.addData("Status", "Complete");
@@ -139,21 +153,21 @@ public class BlueAutonomousShooter3 extends LinearOpMode {
         shooterMotor2.setPower(SHOOTER_POWER);
         shooterServo1.setPosition(SERVO_OPEN_POSITION);
         shooterServo2.setPosition(SERVO_OPEN_POSITION);
-        for (int i = 0; i < 5; i++) { // Loop three times
-            // Move servo forward
-            intakeServo.setPosition(FORWARD_POSITION);
-            //telemetry.addData("Servo State", "Forward");
-            //telemetry.update();
-            sleep(DELAY_MS); // Wait for the specified delay
+        intakeRotor.setPower(0.57);
+//        for (int i = 0; i < 5; i++) { // Loop three times
+//            // Move servo forward
+//            intakeServo.setPosition(FORWARD_POSITION);
+//            //telemetry.addData("Servo State", "Forward");
+//            //telemetry.update();
+//            sleep(DELAY_MS); // Wait for the specified delay
+//
+//            // Move servo back to home
+//            intakeServo.setPosition(HOME_POSITION);
+//            //telemetry.addData("Servo State", "Home");
+//            //telemetry.update();
+//            sleep(DELAY_MS); // Wait for the specified delay
+//        }
 
-            // Move servo back to home
-            intakeServo.setPosition(HOME_POSITION);
-            //telemetry.addData("Servo State", "Home");
-            //telemetry.update();
-            sleep(DELAY_MS); // Wait for the specified delay
-        }
-        shooterServo1.setPosition(0.5);
-        shooterServo2.setPosition(0.5);
     }
 
     // Helper method to deactivate shooter

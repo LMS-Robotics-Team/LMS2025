@@ -19,18 +19,22 @@ public class IntakeMotorControl extends LinearOpMode {
 
     // Declare motor variable
     private static DcMotor intakeMotor = null;
-    private static Servo intakeServo = null;
+    private static DcMotor intakeRotor = null;
+   // private static Servo intakeServo = null;
 
     public static void init(HardwareMap hardwareMap) {
 
         intakeMotor = hardwareMap.get(DcMotor.class, "intake_motor");
-        intakeServo = hardwareMap.get(Servo.class, "intake_servo");
+       // intakeServo = hardwareMap.get(Servo.class, "intake_servo");
+        intakeRotor = hardwareMap.get(DcMotor.class, "intake_rotor");
 
         intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-
+        intakeRotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
         intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        intakeServo.setDirection(Servo.Direction.FORWARD);
+        intakeRotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        //intakeServo.setDirection(Servo.Direction.FORWARD);
 
 
     }
@@ -53,10 +57,10 @@ public class IntakeMotorControl extends LinearOpMode {
         //intakeServo.setPosition(servoPosition);
         if (gamepad2.a) {
 
-            intakeServo.setPosition(0.70);
+            intakeRotor.setPower(0.56);
         } else {
 
-            intakeServo.setPosition(0.5);
+            intakeRotor.setPower(0.0);
         }
     }
 }
