@@ -21,11 +21,12 @@ public class RedAutonomousShooter3 extends LinearOpMode {
     private Servo shooterServo2 = null;
     //private Servo intakeServo = null;
     private static DcMotor intakeRotor = null;
+    private static DcMotor intakeMotor = null;
 
     // Constants for robot movement
     static final double DRIVE_SPEED = 0.5;
     static final double TURN_SPEED = 0.4;
-    static final double SHOOTER_POWER = 1.0;
+    static final double SHOOTER_POWER = 0.75;
     static final double SERVO_OPEN_POSITION = 0.30; // Adjust as needed
     static final double SERVO_CLOSED_POSITION = 0.5; // Adjust as needed
     static final double HOME_POSITION = 0.5; // Adjust as needed
@@ -49,6 +50,7 @@ public class RedAutonomousShooter3 extends LinearOpMode {
         shooterServo2 = hardwareMap.get(Servo.class, "loader_servo");
         //intakeServo = hardwareMap.get(Servo.class, "intake_servo");
         intakeRotor = hardwareMap.get(DcMotor.class, "intake_rotor");
+        intakeMotor = hardwareMap.get(DcMotor.class, "intake_motor");
 
         // Most robots need the motor on one side to be reversed to drive forward.
         frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
@@ -61,6 +63,7 @@ public class RedAutonomousShooter3 extends LinearOpMode {
         shooterServo2.setDirection(Servo.Direction.REVERSE);
         //intakeServo.setDirection(Servo.Direction.FORWARD);
         intakeRotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
         // Set motor modes
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -73,21 +76,22 @@ public class RedAutonomousShooter3 extends LinearOpMode {
         shooterServo2.setPosition(SERVO_CLOSED_POSITION);
         //intakeServo.setPosition(HOME_POSITION);
         intakeRotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        intakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
         // Step 1: Drive straight forward for a few millimeters (adjust time as needed)
-        driveStraight(DRIVE_SPEED, 2.0); // Drive for 1 second
+        driveStraight(DRIVE_SPEED, 1.2); // Drive for 1 second
         stopRobot();
 
         // Step 2: Turn left (adjust time as needed)
-        turnLeft(TURN_SPEED, 1.8); // Turn for 0.8 seconds
+        turnLeft(TURN_SPEED, 1.5); // Turn for 0.8 seconds
         stopRobot();
 
         // Step 3: Drive straight forward for a few millimeters (adjust time as needed)
-        driveStraight(DRIVE_SPEED, .3); // Drive for 1.5 seconds
-        stopRobot();
+       // driveBack(DRIVE_SPEED,0.3); // Drive for 1.5 seconds
+       // stopRobot();
 
         // Step 4: Activate shooter mechanism
         activateShooter();
@@ -97,6 +101,11 @@ public class RedAutonomousShooter3 extends LinearOpMode {
         shooterServo2.setPosition(0.5);
         shooterMotor1.setPower(0);
         shooterMotor2.setPower(0);
+        stopRobot();
+
+        turnRight(TURN_SPEED, 0.5); // Turn for 0.8 seconds
+        stopRobot();
+        driveStraight(DRIVE_SPEED, 1.1); // Drive for 1 second
         stopRobot();
 
         telemetry.addData("Status", "Complete");
@@ -117,6 +126,13 @@ public class RedAutonomousShooter3 extends LinearOpMode {
         frontLeftMotor.setPower(speed);
         backLeftMotor.setPower(speed);
         frontRightMotor.setPower(-speed);
+        backRightMotor.setPower(-speed);
+        sleep((long) (time * 1000));
+    }
+    public void driveBack(double speed, double time) {
+        frontLeftMotor.setPower(-speed);
+        frontRightMotor.setPower(-speed);
+        backLeftMotor.setPower(-speed);
         backRightMotor.setPower(-speed);
         sleep((long) (time * 1000));
     }
@@ -143,6 +159,7 @@ public class RedAutonomousShooter3 extends LinearOpMode {
         shooterServo1.setPosition(SERVO_OPEN_POSITION);
         shooterServo2.setPosition(SERVO_OPEN_POSITION);
         intakeRotor.setPower(0.57);
+        intakeMotor.setPower(0.50);
 
 //        for (int i = 0; i < 5; i++) { // Loop three times
 //            // Move servo forward

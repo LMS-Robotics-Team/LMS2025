@@ -22,6 +22,7 @@ public class BlueAutonomousShooter1 extends LinearOpMode {
     private Servo shooterServo1 = null;
     private Servo shooterServo2 = null;
     private static DcMotor intakeRotor = null;
+    private static DcMotor intakeMotor = null;
     // private Servo intakeServo = null;
 
     // Constants for robot movement
@@ -50,6 +51,8 @@ public class BlueAutonomousShooter1 extends LinearOpMode {
         shooterServo2 = hardwareMap.get(Servo.class, "loader_servo");
         //intakeServo = hardwareMap.get(Servo.class, "intake_servo");
         intakeRotor = hardwareMap.get(DcMotor.class, "intake_rotor");
+        intakeMotor = hardwareMap.get(DcMotor.class, "intake_motor");
+
 
         // Most robots need the motor on one side to be reversed to drive forward.
         frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
@@ -62,6 +65,7 @@ public class BlueAutonomousShooter1 extends LinearOpMode {
         shooterServo2.setDirection(Servo.Direction.REVERSE);
         //intakeServo.setDirection(Servo.Direction.FORWARD);
         intakeRotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
         // Set motor modes
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -74,6 +78,7 @@ public class BlueAutonomousShooter1 extends LinearOpMode {
         shooterServo2.setPosition(SERVO_CLOSED_POSITION);
         //intakeServo.setPosition(HOME_POSITION);
         intakeRotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        intakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
         // Wait for the game to start (driver presses PLAY)
@@ -84,7 +89,7 @@ public class BlueAutonomousShooter1 extends LinearOpMode {
         stopRobot();
 
         // Step 2: Turn right (adjust time as needed)
-        turnLeft(TURN_SPEED, 0.27); // Turn for 0.8 seconds
+        turnLeft(TURN_SPEED, 0.23); // Turn for 0.8 seconds
         stopRobot();
 
         // Step 3: Drive straight forward for a few millimeters (adjust time as needed)
@@ -101,9 +106,9 @@ public class BlueAutonomousShooter1 extends LinearOpMode {
         shooterMotor2.setPower(0);
         stopRobot();
 
-        turnLeft(TURN_SPEED, 0.27); // Turn for 0.8 seconds
+        turnLeft(TURN_SPEED, 0.5); // Turn for 0.8 seconds
         stopRobot();
-        driveStraight(DRIVE_SPEED, 0.30); // Drive for 1 second
+        driveStraight(DRIVE_SPEED, 0.35); // Drive for 1 second
         stopRobot();
 
 
@@ -150,6 +155,8 @@ public class BlueAutonomousShooter1 extends LinearOpMode {
         shooterServo1.setPosition(SERVO_OPEN_POSITION);
         shooterServo2.setPosition(SERVO_OPEN_POSITION);
         intakeRotor.setPower(0.57);
+        intakeMotor.setPower(0.50);
+
 //        for (int i = 0; i < 5; i++) { // Loop three times
 //            // Move servo forward
 //            intakeServo.setPosition(FORWARD_POSITION);
