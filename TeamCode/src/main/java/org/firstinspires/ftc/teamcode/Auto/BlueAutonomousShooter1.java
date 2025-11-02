@@ -89,7 +89,7 @@ public class BlueAutonomousShooter1 extends LinearOpMode {
         stopRobot();
 
         // Step 2: Turn right (adjust time as needed)
-        turnLeft(TURN_SPEED, 0.23); // Turn for 0.8 seconds
+        turnLeft(TURN_SPEED, 0.25); // Turn for 0.8 seconds
         stopRobot();
 
         // Step 3: Drive straight forward for a few millimeters (adjust time as needed)

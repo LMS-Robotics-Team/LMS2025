@@ -82,15 +82,15 @@ public class BlueAutonomousShooter2 extends LinearOpMode {
         waitForStart();
 
         // Step 1: Drive straight forward for a few millimeters (adjust time as needed)
-        driveStraight(DRIVE_SPEED, 2.0); // Drive for 1 second
+        driveStraight(DRIVE_SPEED, 2.3); // Drive for 1 second
         stopRobot();
 
         // Step 2: Turn right (adjust time as needed)
-        turnLeft(TURN_SPEED, 0.3); // Turn for 0.8 seconds
+        turnLeft(TURN_SPEED, 0.4); // Turn for 0.8 seconds
         stopRobot();
 
-        driveBack(DRIVE_SPEED, 0.2); // Drive for 1 second
-        stopRobot();
+        //driveBack(DRIVE_SPEED, 0.2); // Drive for 1 second
+        //stopRobot();
 
         //turnRight(TURN_SPEED, 0.8); // Turn for 0.8 seconds
        // stopRobot();
@@ -110,7 +110,7 @@ public class BlueAutonomousShooter2 extends LinearOpMode {
 
         turnLeft(TURN_SPEED, 0.5); // Turn for 0.8 seconds
         stopRobot();
-        driveStraight(DRIVE_SPEED, 0.8); // Drive for 1 second
+        driveStraight(DRIVE_SPEED, 0.7); // Drive for 1 second
         stopRobot();
 
         telemetry.addData("Status", "Complete");
