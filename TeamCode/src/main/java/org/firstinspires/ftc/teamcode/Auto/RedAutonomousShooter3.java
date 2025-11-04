@@ -26,7 +26,7 @@ public class RedAutonomousShooter3 extends LinearOpMode {
     // Constants for robot movement
     static final double DRIVE_SPEED = 0.5;
     static final double TURN_SPEED = 0.4;
-    static final double SHOOTER_POWER = 0.75;
+    static final double SHOOTER_POWER = 0.7;
     static final double SERVO_OPEN_POSITION = 0.30; // Adjust as needed
     static final double SERVO_CLOSED_POSITION = 0.5; // Adjust as needed
     static final double HOME_POSITION = 0.5; // Adjust as needed
@@ -86,7 +86,7 @@ public class RedAutonomousShooter3 extends LinearOpMode {
         stopRobot();
 
         // Step 2: Turn left (adjust time as needed)
-        turnLeft(TURN_SPEED, 1.5); // Turn for 0.8 seconds
+        turnLeft(TURN_SPEED, 1.3); // Turn for 0.8 seconds
         stopRobot();
 
         // Step 3: Drive straight forward for a few millimeters (adjust time as needed)
@@ -95,7 +95,7 @@ public class RedAutonomousShooter3 extends LinearOpMode {
 
         // Step 4: Activate shooter mechanism
         activateShooter();
-        sleep(6000); // Allow shooter to operate for 6 seconds
+        sleep(5000); // Allow shooter to operate for 6 seconds
         //deactivateShooter();
         shooterServo1.setPosition(0.5);
         shooterServo2.setPosition(0.5);
@@ -158,8 +158,17 @@ public class RedAutonomousShooter3 extends LinearOpMode {
         shooterMotor2.setPower(SHOOTER_POWER);
         shooterServo1.setPosition(SERVO_OPEN_POSITION);
         shooterServo2.setPosition(SERVO_OPEN_POSITION);
-        intakeRotor.setPower(0.57);
-        intakeMotor.setPower(0.50);
+        try {
+            // Introduce a 3-second delay (3000 milliseconds)
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            // Handle the InterruptedException, which can occur if another thread
+            // interrupts the current thread while it's sleeping.
+            Thread.currentThread().interrupt(); // Re-interrupt the current thread
+            System.err.println("Thread interrupted during sleep: " + e.getMessage());
+        }
+        intakeRotor.setPower(0.40);
+        intakeMotor.setPower(0.30);
 
 //        for (int i = 0; i < 5; i++) { // Loop three times
 //            // Move servo forward

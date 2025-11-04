@@ -29,7 +29,7 @@ public class RedAutonomousShooter1 extends LinearOpMode {
     // Constants for robot movement
     static final double DRIVE_SPEED = .5;
     static final double TURN_SPEED = 0.4;
-    static final double SHOOTER_POWER = 1.0;
+    static final double SHOOTER_POWER = 0.95;
     static final double SERVO_OPEN_POSITION = 0.30; // Adjust as needed
     static final double SERVO_CLOSED_POSITION = 0.50; // Adjust as needed
     static final double HOME_POSITION = 0.5; // Adjust as needed
@@ -89,7 +89,7 @@ public class RedAutonomousShooter1 extends LinearOpMode {
         stopRobot();
 
         // Step 2: Turn right (adjust time as needed)
-        turnRight(TURN_SPEED, 0.25); // Turn for 0.8 seconds
+        turnRight(TURN_SPEED, 0.23); // Turn for 0.8 seconds
         stopRobot();
 
         // Step 3: Drive straight forward for a few millimeters (adjust time as needed)
@@ -108,7 +108,7 @@ public class RedAutonomousShooter1 extends LinearOpMode {
 
         turnRight(TURN_SPEED, 0.50); // Turn for 0.8 seconds
         stopRobot();
-        driveStraight(DRIVE_SPEED, 0.35); // Drive for 1 second
+        driveStraight(DRIVE_SPEED, 0.20); // Drive for 1 second
         stopRobot();
 
 
@@ -140,6 +140,14 @@ public class RedAutonomousShooter1 extends LinearOpMode {
         backRightMotor.setPower(speed);
         sleep((long) (time * 1000));
     }
+
+    public void driveBack(double speed, double time) {
+        frontLeftMotor.setPower(-speed);
+        frontRightMotor.setPower(-speed);
+        backLeftMotor.setPower(-speed);
+        backRightMotor.setPower(-speed);
+        sleep((long) (time * 1000));
+    }
     // Helper method to stop the robot
     public void stopRobot() {
         frontLeftMotor.setPower(0);
@@ -154,8 +162,17 @@ public class RedAutonomousShooter1 extends LinearOpMode {
         shooterMotor2.setPower(SHOOTER_POWER);
         shooterServo1.setPosition(SERVO_OPEN_POSITION);
         shooterServo2.setPosition(SERVO_OPEN_POSITION);
-        intakeRotor.setPower(0.57);
-        intakeMotor.setPower(0.50);
+        try {
+            // Introduce a 3-second delay (3000 milliseconds)
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            // Handle the InterruptedException, which can occur if another thread
+            // interrupts the current thread while it's sleeping.
+            Thread.currentThread().interrupt(); // Re-interrupt the current thread
+            System.err.println("Thread interrupted during sleep: " + e.getMessage());
+        }
+        intakeRotor.setPower(0.53);
+        intakeMotor.setPower(0.35);
 //        for (int i = 0; i < 5; i++) { // Loop three times
 //            // Move servo forward
 //            intakeServo.setPosition(FORWARD_POSITION);

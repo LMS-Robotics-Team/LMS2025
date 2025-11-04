@@ -27,7 +27,7 @@ public class BlueAutonomousShooter2 extends LinearOpMode {
     // Constants for robot movement
     static final double DRIVE_SPEED = 0.5;
     static final double TURN_SPEED = 0.4;
-    static final double SHOOTER_POWER = 1.0;
+    static final double SHOOTER_POWER = 0.78;
     static final double SERVO_OPEN_POSITION = 0.30; // Adjust as needed
     static final double SERVO_CLOSED_POSITION = 0.5; // Adjust as needed
     static final double HOME_POSITION = 0.5; // Adjust as needed
@@ -161,8 +161,17 @@ public class BlueAutonomousShooter2 extends LinearOpMode {
         shooterMotor2.setPower(SHOOTER_POWER);
         shooterServo1.setPosition(SERVO_OPEN_POSITION);
         shooterServo2.setPosition(SERVO_OPEN_POSITION);
-        intakeRotor.setPower(0.57);
-        intakeMotor.setPower(0.50);
+        try {
+            // Introduce a 3-second delay (3000 milliseconds)
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            // Handle the InterruptedException, which can occur if another thread
+            // interrupts the current thread while it's sleeping.
+            Thread.currentThread().interrupt(); // Re-interrupt the current thread
+            System.err.println("Thread interrupted during sleep: " + e.getMessage());
+        }
+        intakeRotor.setPower(0.42);
+        intakeMotor.setPower(0.30);
 //        for (int i = 0; i < 5; i++) { // Loop three times
 //            // Move servo forward
 //            intakeServo.setPosition(FORWARD_POSITION);
