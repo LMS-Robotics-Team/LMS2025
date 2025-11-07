@@ -113,7 +113,7 @@ public class BlueAutonomousShooter1 extends LinearOpMode {
         driveStraight(DRIVE_SPEED, 0.50); // Drive for 1 second
         stopRobot();
 
-76836+
+
         telemetry.addData("Status", "Complete");
         telemetry.update();
     }
