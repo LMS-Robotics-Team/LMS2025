@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -15,8 +16,8 @@ public class BasicShooter extends LinearOpMode {
 
     }
 
-    private static DcMotor shooterMotor1 = null;
-    private static DcMotor shooterMotor2 = null;
+    private static DcMotorEx shooterMotor1 = null;
+    private static DcMotorEx shooterMotor2 = null;
     private static Servo aimerServo = null;
     private static Servo loaderServo = null;
 
@@ -30,22 +31,25 @@ public class BasicShooter extends LinearOpMode {
     private static final double POSITION_TWO = 0.3; // Example position 2 (middle)
     private static final double POSITION_THREE = 0.25; // Example position 3
 
+
     public static void init(HardwareMap hardwareMap) {
         // Initialize hardware
-        shooterMotor1 = hardwareMap.get(DcMotor.class, "shooter_motor_1");
-        shooterMotor2 = hardwareMap.get(DcMotor.class, "shooter_motor_2");
+        shooterMotor1 = hardwareMap.get(DcMotorEx.class, "shooter_motor_1");
+        shooterMotor2 = hardwareMap.get(DcMotorEx.class, "shooter_motor_2");
         aimerServo = hardwareMap.get(Servo.class, "aimer_servo");
         loaderServo = hardwareMap.get(Servo.class, "loader_servo");
 
         // Set motor and servo directions (adjust based on your robot's wiring)
-        shooterMotor1.setDirection(DcMotor.Direction.REVERSE);
-        shooterMotor2.setDirection(DcMotor.Direction.FORWARD); // Or FORWARD if both motors spin same way
+        shooterMotor1.setDirection(DcMotorEx.Direction.REVERSE);
+        shooterMotor2.setDirection(DcMotorEx.Direction.FORWARD); // Or FORWARD if both motors spin same way
         aimerServo.setDirection(Servo.Direction.FORWARD);
         loaderServo.setDirection(Servo.Direction.REVERSE);
 
         // Set motor zero power behavior
-        shooterMotor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        shooterMotor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        shooterMotor1.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        shooterMotor2.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        shooterMotor1.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        shooterMotor2.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
 
         // Initial servo positions
 
@@ -54,12 +58,19 @@ public class BasicShooter extends LinearOpMode {
     }
 
     public static void handleInput(Gamepad gamepad2) {
+        double targetVelocity = 920;
+        double targetVelocity1 = 1250;
         if (gamepad2.left_bumper) {
-            shooterMotor1.setPower(0.75); // Full power
-            shooterMotor2.setPower(0.75);
+            //shooterMotor1.setPower(0.75); // Full power
+            //shooterMotor2.setPower(0.75);
+            shooterMotor1.setVelocity(targetVelocity);
+            shooterMotor2.setVelocity(targetVelocity);
+
         } else if (gamepad2.right_bumper){
-            shooterMotor1.setPower(1.0); // Full power
-            shooterMotor2.setPower(1.0);
+            //shooterMotor1.setPower(0.5); // Full power
+            //shooterMotor2.setPower(0.5);
+            shooterMotor1.setVelocity(targetVelocity1);
+            shooterMotor2.setVelocity(targetVelocity1);
         }
         else{
             shooterMotor1.setPower(0.0);

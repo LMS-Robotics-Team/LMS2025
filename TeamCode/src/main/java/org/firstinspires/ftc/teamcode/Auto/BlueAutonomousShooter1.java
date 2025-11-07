@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode.Auto;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 //import com.qualcomm.robotcore.hardware.CRServo;
@@ -17,8 +18,8 @@ public class BlueAutonomousShooter1 extends LinearOpMode {
     private DcMotor frontRightMotor = null;
     private DcMotor backLeftMotor = null;
     private DcMotor backRightMotor = null;
-    private DcMotor shooterMotor1 = null;
-    private DcMotor shooterMotor2 = null;
+    private DcMotorEx shooterMotor1 = null;
+    private DcMotorEx shooterMotor2 = null;
     private Servo shooterServo1 = null;
     private Servo shooterServo2 = null;
     private static DcMotor intakeRotor = null;
@@ -28,7 +29,8 @@ public class BlueAutonomousShooter1 extends LinearOpMode {
     // Constants for robot movement
     static final double DRIVE_SPEED = .5;
     static final double TURN_SPEED = 0.4;
-    static final double SHOOTER_POWER = 0.95;
+    //static final double SHOOTER_POWER = 0.95;
+    static final double SHOOTER_VELOCITY = 2000;
     static final double SERVO_OPEN_POSITION = 0.30; // Adjust as needed
     static final double SERVO_CLOSED_POSITION = 0.50; // Adjust as needed
     static final double HOME_POSITION = 0.5; // Adjust as needed
@@ -45,8 +47,8 @@ public class BlueAutonomousShooter1 extends LinearOpMode {
         frontRightMotor = hardwareMap.get(DcMotor.class, "driveMotorFR");
         backLeftMotor = hardwareMap.get(DcMotor.class, "driveMotorBL");
         backRightMotor = hardwareMap.get(DcMotor.class, "driveMotorBR");
-        shooterMotor1 = hardwareMap.get(DcMotor.class, "shooter_motor_1");
-        shooterMotor2 = hardwareMap.get(DcMotor.class, "shooter_motor_2");
+        shooterMotor1 = hardwareMap.get(DcMotorEx.class, "shooter_motor_1");
+        shooterMotor2 = hardwareMap.get(DcMotorEx.class, "shooter_motor_2");
         shooterServo1 = hardwareMap.get(Servo.class, "aimer_servo");
         shooterServo2 = hardwareMap.get(Servo.class, "loader_servo");
         //intakeServo = hardwareMap.get(Servo.class, "intake_servo");
@@ -59,8 +61,8 @@ public class BlueAutonomousShooter1 extends LinearOpMode {
         backLeftMotor.setDirection(DcMotor.Direction.REVERSE);
         frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
         backRightMotor.setDirection(DcMotor.Direction.FORWARD);
-        shooterMotor1.setDirection(DcMotor.Direction.REVERSE);
-        shooterMotor2.setDirection(DcMotor.Direction.FORWARD);
+        shooterMotor1.setDirection(DcMotorEx.Direction.REVERSE);
+        shooterMotor2.setDirection(DcMotorEx.Direction.FORWARD);
         shooterServo1.setDirection(Servo.Direction.FORWARD);
         shooterServo2.setDirection(Servo.Direction.REVERSE);
         //intakeServo.setDirection(Servo.Direction.FORWARD);
@@ -72,8 +74,8 @@ public class BlueAutonomousShooter1 extends LinearOpMode {
         frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        shooterMotor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        shooterMotor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        shooterMotor1.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        shooterMotor2.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         shooterServo1.setPosition(SERVO_CLOSED_POSITION);
         shooterServo2.setPosition(SERVO_CLOSED_POSITION);
         //intakeServo.setPosition(HOME_POSITION);
@@ -151,8 +153,8 @@ public class BlueAutonomousShooter1 extends LinearOpMode {
 
     // Helper method to activate shooter
     public void activateShooter() {
-        shooterMotor1.setPower(SHOOTER_POWER);
-        shooterMotor2.setPower(SHOOTER_POWER);
+        shooterMotor1.setVelocity(SHOOTER_VELOCITY);
+        shooterMotor2.setVelocity(SHOOTER_VELOCITY);
         shooterServo1.setPosition(SERVO_OPEN_POSITION);
         shooterServo2.setPosition(SERVO_OPEN_POSITION);
         try {
