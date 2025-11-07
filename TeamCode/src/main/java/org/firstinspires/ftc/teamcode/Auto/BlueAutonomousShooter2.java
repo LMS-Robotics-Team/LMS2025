@@ -29,7 +29,7 @@ public class BlueAutonomousShooter2 extends LinearOpMode {
     static final double DRIVE_SPEED = 0.5;
     static final double TURN_SPEED = 0.4;
     static final double SHOOTER_POWER = 0.78;
-    static final double SHOOTER_VELOCITY = 1650;
+    static final double SHOOTER_VELOCITY = 900;
     static final double SERVO_OPEN_POSITION = 0.30; // Adjust as needed
     static final double SERVO_CLOSED_POSITION = 0.5; // Adjust as needed
     static final double HOME_POSITION = 0.5; // Adjust as needed

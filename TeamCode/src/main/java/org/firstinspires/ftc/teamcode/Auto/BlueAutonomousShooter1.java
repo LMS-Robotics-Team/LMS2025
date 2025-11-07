@@ -30,7 +30,7 @@ public class BlueAutonomousShooter1 extends LinearOpMode {
     static final double DRIVE_SPEED = .5;
     static final double TURN_SPEED = 0.4;
     //static final double SHOOTER_POWER = 0.95;
-    static final double SHOOTER_VELOCITY = 2000;
+    static final double SHOOTER_VELOCITY = 1250;
     static final double SERVO_OPEN_POSITION = 0.30; // Adjust as needed
     static final double SERVO_CLOSED_POSITION = 0.50; // Adjust as needed
     static final double HOME_POSITION = 0.5; // Adjust as needed
@@ -110,10 +110,10 @@ public class BlueAutonomousShooter1 extends LinearOpMode {
 
         turnLeft(TURN_SPEED, 0.5); // Turn for 0.8 seconds
         stopRobot();
-        driveStraight(DRIVE_SPEED, 0.20); // Drive for 1 second
+        driveStraight(DRIVE_SPEED, 0.50); // Drive for 1 second
         stopRobot();
 
-
+76836+
         telemetry.addData("Status", "Complete");
         telemetry.update();
     }

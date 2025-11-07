@@ -113,45 +113,8 @@ public class RedAutonomousShooter1 extends LinearOpMode {
 
         turnRight(TURN_SPEED, 0.65); // Turn for 0.8 seconds
         stopRobot();
-        driveBack(DRIVE_SPEED, 1.7); // Drive for 1 second
+        driveStraight(DRIVE_SPEED, 0.7); // Drive for 1 second
         stopRobot();
-
-        deactivateShooter();
-
-        try {
-            // Introduce a 3-second delay (3000 milliseconds)
-            Thread.sleep(3500);
-        } catch (InterruptedException e) {
-            // Handle the InterruptedException, which can occur if another thread
-            // interrupts the current thread while it's sleeping.
-            Thread.currentThread().interrupt(); // Re-interrupt the current thread
-            System.err.println("Thread interrupted during sleep: " + e.getMessage());
-        }
-
-
-        driveStraight(DRIVE_SPEED, 1.5); // Drive for 1 second
-        stopRobot();
-        turnLeft(TURN_SPEED, 0.65); // Turn for 0.8 seconds
-        stopRobot();
-
-
-        activateShooter();
-        sleep(6000); // Allow shooter to operate for 6 seconds
-        //deactivateShooter();
-        shooterServo1.setPosition(0.5);
-        shooterServo2.setPosition(0.5);
-        shooterMotor1.setPower(0);
-        shooterMotor2.setPower(0);
-        intakeRotor.setPower(0);
-        intakeMotor.setPower(0);
-        stopRobot();
-
-        turnRight(TURN_SPEED, 0.65); // Turn for 0.8 seconds
-        stopRobot();
-        driveStraight(DRIVE_SPEED, 0.8); // Drive for 1 second
-        stopRobot();
-
-
 
         telemetry.addData("Status", "Complete");
         telemetry.update();
