@@ -89,7 +89,7 @@ public class RedAutonomousShooter2 extends LinearOpMode {
         stopRobot();
 
         // Step 2: Turn right (adjust time as needed)
-        turnRight(TURN_SPEED, 0.45); // Turn for 0.8 seconds
+        turnRight(TURN_SPEED, 0.40); // Turn for 0.8 seconds
         stopRobot();
 
        // driveBack(DRIVE_SPEED, 0.2); // Drive for 1 second
